@@ -7,10 +7,19 @@ class MoviesController < ApplicationController
     end
   
     def index
-      @sort = params[:sort]
+      @sort = params[:sort] || session[:sort]
+      order = {title: :asc} if @sort == 'title'
+      order = {release_date: :asc} if @sort == 'release_date'
       @all_ratings = Movie.all_ratings
-      @ratings_to_show = [] || params[:ratings]&.keys
-      @movies = Movie.with_ratings(params[:ratings]&.keys).order(@sort)
+      ratings_to_show_hash = params[:ratings] || session[:ratings] || @all_ratings.map{ |r| [rating, 1] }.to_h
+      @ratings_to_show = ratings_to_show_hash.keys
+
+      if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
+        session[:sort] = @sort
+        session[:ratings] = ratings_to_show_hash
+        redirect_to sort: @sort, ratings: ratings_to_show_hash and return
+      end
+      @movies = Movie.with_ratings(ratings_to_show_hash.keys).order(order)
       
     end
   
