@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
       order = {title: :asc} if @sort == 'title'
       order = {release_date: :asc} if @sort == 'release_date'
       @all_ratings = Movie.all_ratings
-      ratings_to_show_hash = params[:ratings] || session[:ratings] || @all_ratings.map{ |r| [rating, 1] }.to_h
+      ratings_to_show_hash = params[:ratings] || session[:ratings] || @all_ratings.map{ |r| [r, 1] }.to_h
       @ratings_to_show = ratings_to_show_hash.keys
 
       if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
