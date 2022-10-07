@@ -99,3 +99,53 @@ Cannot render console from 184.23.20.108! Allowed networks: 127.0.0.1, ::1, 127.
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
   [1m[35mSQL (0.2ms)[0m  INSERT INTO "movies" ("title", "rating", "release_date", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["title", "Chicken Run"], ["rating", "G"], ["release_date", "2000-06-21 00:00:00.000000"], ["created_at", "2022-10-07 02:05:20.165596"], ["updated_at", "2022-10-07 02:05:20.165596"]]
   [1m[36m (52.3ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for 184.23.20.108 at 2022-10-07 02:14:41 +0000
+Cannot render console from 184.23.20.108! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by MoviesController#index as HTML
+  [1m[36mMovie Load (0.4ms)[0m  [1mSELECT "movies".* FROM "movies"[0m
+  Rendered movies/index.html.erb within layouts/application (28.1ms)
+Completed 500 Internal Server Error in 35ms (ActiveRecord: 0.6ms)
+
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    34: <%= link_to 'Add new movie', new_movie_path, :class => 'btn btn-primary' %>
+    35: <%= form_tag movies_path, method: :get, id: 'ratings_form' do %>
+    36:   Include:
+    37:   <% @all_ratings.each do |rating| %>
+    38:     <div class="form-check  form-check-inline">
+    39:       <%= label_tag "ratings[#{rating}]", rating, class: 'form-check-label' %>
+    40:       <%= check_box_tag "ratings[#{rating}]", "1",  @ratings_to_show.include?(rating), class: 'form-check-input' %>
+  app/views/movies/index.html.erb:37:in `block in _app_views_movies_index_html_erb__3108041425186791688_70258725748040'
+  app/views/movies/index.html.erb:35:in `_app_views_movies_index_html_erb__3108041425186791688_70258725748040'
+
+
+  Rendered /home/codio/.rvm/gems/ruby-2.6.6/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.6ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.6/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.6/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.6/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (18.2ms)
+
+
+Started GET "/" for 184.23.20.108 at 2022-10-07 02:26:35 +0000
+Cannot render console from 184.23.20.108! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by MoviesController#index as HTML
+  [1m[35mMovie Load (0.5ms)[0m  SELECT "movies".* FROM "movies"
+  Rendered movies/index.html.erb within layouts/application (9.5ms)
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.8ms)
+
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    34: <%= link_to 'Add new movie', new_movie_path, :class => 'btn btn-primary' %>
+    35: <%= form_tag movies_path, method: :get, id: 'ratings_form' do %>
+    36:   Include:
+    37:   <% @all_ratings.each do |rating| %>
+    38:     <div class="form-check  form-check-inline">
+    39:       <%= label_tag "ratings[#{rating}]", rating, class: 'form-check-label' %>
+    40:       <%= check_box_tag "ratings[#{rating}]", "1",  @ratings_to_show.include?(rating), class: 'form-check-input' %>
+  app/views/movies/index.html.erb:37:in `block in _app_views_movies_index_html_erb__3108041425186791688_70258725748040'
+  app/views/movies/index.html.erb:35:in `_app_views_movies_index_html_erb__3108041425186791688_70258725748040'
+
+
+  Rendered /home/codio/.rvm/gems/ruby-2.6.6/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.1ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.6/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.6/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/codio/.rvm/gems/ruby-2.6.6/gems/actionpack-4.2.11/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (17.6ms)
